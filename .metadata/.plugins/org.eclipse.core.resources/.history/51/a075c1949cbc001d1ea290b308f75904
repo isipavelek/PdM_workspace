@@ -1,0 +1,29 @@
+/*
+ * API_uart.c
+ *
+ *  Created on: 7 mar. 2023
+ *      Author: ipave
+ */
+
+#include "API_uart.h"
+
+
+
+bool_t uartInit(){
+
+	return 1;
+	return 0;
+
+}
+void uartSendString(uint8_t * pstring){
+
+}
+void uartSendStringSize(uint8_t * pstring, uint16_t size){
+
+
+	HAL_UART_Transmit();
+
+}
+void uartReceiveStringSize(uint8_t * pstring, uint16_t size){
+
+}

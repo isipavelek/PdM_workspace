@@ -59,8 +59,6 @@ const char LEDS[LIM_SEC]={LED1,LED2,LED3};
 #define OFF 0
 #define ON 1
 
-
-
 #define DEMORA_BASE 40
 
 void debounceFSM_init();		// debe cargar el estado inicial
@@ -76,12 +74,13 @@ typedef enum{
 	BUTTON_RAISING,
 } debounceState_t;
 
+uchar estado=BUTTON_UP;
+delay_t estructura;
 
 
 int main(void)
 {
   HAL_Init();
-  delay_t estructura;
 
   /* Configure the system clock to 180 MHz */
   SystemClock_Config();
@@ -184,7 +183,6 @@ static void Error_Handler(void)
 }
 
 void debounceFSM_init(){
-	uchar estado=BUTTON_UP;
     delayInit(&estructura,DEMORA_BASE);
 
 
