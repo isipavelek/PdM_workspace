@@ -1,0 +1,28 @@
+/*
+ * API_delay.c
+ *
+ *  Created on: 5 mar. 2023
+ *      Author: ipave
+ */
+
+#include "API_delay.h"
+
+
+void delayInit( delay_t * delay, tick_t duration ){
+	delay->startTime=HAL_GetTick();
+	delay->duration=duration;
+	delay->running=FALSE;
+
+}
+bool_t delayRead( delay_t * delay ){
+	if(delay->running)delay->running=TRUE;
+	if(HAL_GetTick()-delay->startTime>=delay->duration){
+		delay->running=FALSE;
+		return 1;
+	}else return 0;
+}
+
+void delayWrite( delay_t * delay, tick_t duration ){
+	delay->duration=duration;
+}
+
