@@ -50,38 +50,57 @@ static void Error_Handler(void);
   * @retval None
   */
 
-
-
-
 typedef unsigned char uchar;
 
-#define LIM_SEC 3
-const char LEDS[LIM_SEC]={LED1,LED2,LED3};
 #define FALSE 0
 #define TRUE 1
 
+bool_t readKey();
+
+extern bool_t tecla;
+bool_t demora=FALSE;
+#define DEMORA_100 100
+#define DEMORA_500 500
 
 int main(void)
 {
+  delay_t estructura;
   HAL_Init();
-
   /* Configure the system clock to 180 MHz */
   SystemClock_Config();
-
   /* Initialize BSP Led for LED2 */
-  BSP_LED_Init(LED1);
+  BSP_LED_Init(LED2);
   BSP_PB_Init(BUTTON_USER, BUTTON_MODE_GPIO);
   //BSP_LED_On(LED1);
   debounceFSM_init();
+  delayInit(&estructura,DEMORA_100);
+
   /* Infinite loop */
   while (1){
 	  debounceFSM_update();
 
-	  if(cambiar==TRUE)BSP_LED_Toogle(LED1);
+
+	  if(delayRead(&estructura)==TRUE){
+	  		  BSP_LED_Toggle(LED2);
+	  		  if(!demora)delayInit(&estructura,DEMORA_100);
+	  		  else delayInit(&estructura,DEMORA_500);
+	  }
+
+	  if(readKey()==TRUE)demora^=1;
 
 
 
   }
+}
+
+bool_t readKey(){
+
+	if(tecla==TRUE){
+		tecla=0;
+		return TRUE;
+	}
+	return FALSE;
+;
 }
 //if(BSP_PB_GetState(BUTTON_USER)){
 
@@ -201,4 +220,5 @@ void assert_failed(uint8_t *file, uint32_t line)
   */
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
+
 
