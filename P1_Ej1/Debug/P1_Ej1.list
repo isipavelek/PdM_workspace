@@ -3501,7 +3501,7 @@ int main(void)
 
   /* Infinite loop */
   while (1){
-	for(i=0;i<LIM_SEC;i++){
+	for(i=0;i<sizeof(LEDS);i++){
  8001704:	2300      	movs	r3, #0
  8001706:	71fb      	strb	r3, [r7, #7]
  8001708:	e014      	b.n	8001734 <main+0x54>
@@ -3523,7 +3523,7 @@ int main(void)
 		  HAL_Delay(200);
  8001728:	20c8      	movs	r0, #200	; 0xc8
  800172a:	f7ff f835 	bl	8000798 <HAL_Delay>
-	for(i=0;i<LIM_SEC;i++){
+	for(i=0;i<sizeof(LEDS);i++){
  800172e:	79fb      	ldrb	r3, [r7, #7]
  8001730:	3301      	adds	r3, #1
  8001732:	71fb      	strb	r3, [r7, #7]

@@ -70,7 +70,7 @@ int main(void)
 
   /* Infinite loop */
   while (1){
-	for(i=0;i<LIM_SEC;i++){
+	for(i=0;i<sizeof(LEDS);i++){
 		  BSP_LED_Toggle(LEDS[i]);
 		  HAL_Delay(200);
 		  BSP_LED_Toggle(LEDS[i]);

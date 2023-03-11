@@ -21,6 +21,7 @@
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
 #include "API_debounce.h"
+#include "API_uart.h"
 
 /** @addtogroup STM32F4xx_HAL_Examples
   * @{
@@ -74,6 +75,7 @@ int main(void)
   //BSP_LED_On(LED1);
   debounceFSM_init();
   /* Infinite loop */
+  uartInit();
   while (1){
 //	  debounceFSM_update();
 

@@ -84,12 +84,12 @@ int main(void)
 
 	  if(delayRead(&estructura)==TRUE){
 		  BSP_LED_Toggle(LEDS[i]);
-  		  estado^=1;
   		  if(estado==ON){
   			  i++;
-  			  if(i==LIM_SEC)i=0;
+  			  if(i==sizeof(LEDS))i=0;
   		  }
-		  delayInit(&estructura,DEMORA_BASE);
+  		  estado^=1;
+  		  delayInit(&estructura,DEMORA_BASE);
 
 	  }
 

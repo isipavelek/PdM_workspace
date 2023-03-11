@@ -87,6 +87,8 @@ int main(void)
 
   /* Initialize BSP Led for LED2 */
   BSP_LED_Init(LED1);
+  BSP_LED_Init(LED2);
+
   BSP_PB_Init(BUTTON_USER, BUTTON_MODE_GPIO);
 
   debounceFSM_init();
@@ -188,39 +190,34 @@ void debounceFSM_init(){
 
 }
 void debounceFSM_update(){
-
 	switch (estado){
-	case (BUTTON_UP): if(!BSP_PB_GetState(BUTTON_USER))estado=BUTTON_FALLING;
-
+	case (BUTTON_UP): if(BSP_PB_GetState(BUTTON_USER))estado=BUTTON_FALLING;
 					  break;
-	case (BUTTON_FALLING):if(!BSP_PB_GetState(BUTTON_USER))estado=BUTTON_DOWN;
-						 else {
-							 buttonReleased();
-							 estado=BUTTON_UP;
-						 }
-						break;
-	case (BUTTON_DOWN):if(BSP_PB_GetState(BUTTON_USER))estado=BUTTON_RAISING;
-						break;
-	case (BUTTON_RAISING):if(!BSP_PB_GetState(BUTTON_USER))estado=BUTTON_DOWN;
+	case (BUTTON_FALLING):if(!BSP_PB_GetState(BUTTON_USER))estado=BUTTON_UP;
 						 else {
 							 buttonPressed();
+							 estado=BUTTON_DOWN;
+						 }
+						break;
+	case (BUTTON_DOWN):if(!BSP_PB_GetState(BUTTON_USER))estado=BUTTON_RAISING;
+						break;
+	case (BUTTON_RAISING):if(BSP_PB_GetState(BUTTON_USER))estado=BUTTON_DOWN;
+						 else {
+
+							 buttonReleased();
 							 estado=BUTTON_UP;
 						 }
 						break;
 
 
 	}
-
-
 }
 
 void buttonPressed(){
 	  BSP_LED_On(LED1);
 
-
 }
 void buttonReleased(){
-
 	  BSP_LED_Off(LED1);
 
 }

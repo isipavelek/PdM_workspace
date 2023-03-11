@@ -3539,35 +3539,35 @@ int main(void)
  8001740:	5cd3      	ldrb	r3, [r2, r3]
  8001742:	4618      	mov	r0, r3
  8001744:	f7fe ff72 	bl	800062c <BSP_LED_Toggle>
-  		  estado^=1;
+  		  if(estado==ON){
  8001748:	4b0f      	ldr	r3, [pc, #60]	; (8001788 <main+0x88>)
  800174a:	781b      	ldrb	r3, [r3, #0]
- 800174c:	f083 0301 	eor.w	r3, r3, #1
- 8001750:	b2db      	uxtb	r3, r3
- 8001752:	2b00      	cmp	r3, #0
- 8001754:	bf14      	ite	ne
- 8001756:	2301      	movne	r3, #1
- 8001758:	2300      	moveq	r3, #0
- 800175a:	b2da      	uxtb	r2, r3
- 800175c:	4b0a      	ldr	r3, [pc, #40]	; (8001788 <main+0x88>)
- 800175e:	701a      	strb	r2, [r3, #0]
-  		  if(estado==ON){
+ 800174c:	2b00      	cmp	r3, #0
+ 800174e:	d007      	beq.n	8001760 <main+0x60>
+  			  i++;
+ 8001750:	7bfb      	ldrb	r3, [r7, #15]
+ 8001752:	3301      	adds	r3, #1
+ 8001754:	73fb      	strb	r3, [r7, #15]
+  			  if(i==sizeof(LEDS))i=0;
+ 8001756:	7bfb      	ldrb	r3, [r7, #15]
+ 8001758:	2b03      	cmp	r3, #3
+ 800175a:	d101      	bne.n	8001760 <main+0x60>
+ 800175c:	2300      	movs	r3, #0
+ 800175e:	73fb      	strb	r3, [r7, #15]
+  		  }
+  		  estado^=1;
  8001760:	4b09      	ldr	r3, [pc, #36]	; (8001788 <main+0x88>)
  8001762:	781b      	ldrb	r3, [r3, #0]
- 8001764:	2b00      	cmp	r3, #0
- 8001766:	d007      	beq.n	8001778 <main+0x78>
-  			  i++;
- 8001768:	7bfb      	ldrb	r3, [r7, #15]
- 800176a:	3301      	adds	r3, #1
- 800176c:	73fb      	strb	r3, [r7, #15]
-  			  if(i==LIM_SEC)i=0;
- 800176e:	7bfb      	ldrb	r3, [r7, #15]
- 8001770:	2b03      	cmp	r3, #3
- 8001772:	d101      	bne.n	8001778 <main+0x78>
- 8001774:	2300      	movs	r3, #0
- 8001776:	73fb      	strb	r3, [r7, #15]
-  		  }
-		  delayInit(&estructura,DEMORA_BASE);
+ 8001764:	f083 0301 	eor.w	r3, r3, #1
+ 8001768:	b2db      	uxtb	r3, r3
+ 800176a:	2b00      	cmp	r3, #0
+ 800176c:	bf14      	ite	ne
+ 800176e:	2301      	movne	r3, #1
+ 8001770:	2300      	moveq	r3, #0
+ 8001772:	b2da      	uxtb	r2, r3
+ 8001774:	4b04      	ldr	r3, [pc, #16]	; (8001788 <main+0x88>)
+ 8001776:	701a      	strb	r2, [r3, #0]
+  		  delayInit(&estructura,DEMORA_BASE);
  8001778:	463b      	mov	r3, r7
  800177a:	21c8      	movs	r1, #200	; 0xc8
  800177c:	4618      	mov	r0, r3

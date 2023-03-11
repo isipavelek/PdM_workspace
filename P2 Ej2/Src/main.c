@@ -51,20 +51,23 @@ static void Error_Handler(void);
 typedef unsigned char uchar;
 
 #define DEMORA_BASE 100
-
 #define DEMORA_LED1 100
-#define LED1_BASE DEMORA_LED1/DEMORABASE
+#define LED1_BASE (DEMORA_LED1/DEMORA_BASE+1)	//suma 1 dado que el indice arranca en 1
 
-#define DEMORA_LED2 500 	//5 veces la demora base 500ms
-#define LED2_BASE DEMORA_LED2/DEMORABASE
-#define DEMORA_LED3 1000	//10 veces la demora base 1000ms
-#define LED3_BASE DEMORA_LED3/DEMORABASE
+#define DEMORA_LED2 500
+#define LED2_BASE (DEMORA_LED2/DEMORA_BASE+1)  ////6 veces la demora base 500ms
+#define DEMORA_LED3 1000
+#define LED3_BASE (DEMORA_LED3/DEMORA_BASE+1)	//11 veces la demora base 500ms
+
+#define INICIO 1
+#define T_FINAL (LED3_BASE+1)		//al desbordar vuelve a empezar
+
 #define FALSE 0
 #define TRUE 1
 
 int main(void)
 {
-  uchar tToogleLed=0;
+  uchar tToogleLed=INICIO;
   HAL_Init();
   delay_t estructura;
 
@@ -81,12 +84,12 @@ int main(void)
   while (1){
 
 	  if(delayRead(&estructura)==TRUE){
-		  tToogleLed++;
 		  BSP_LED_Toggle(LED1);
 //		  if(!(tToogleLed%DEMORA_LED1))BSP_LED_Toggle(LED1);
-
-		  if(!(tToogleLed%DEMORA_LED2))BSP_LED_Toggle(LED2);
-		  if(!(tToogleLed%DEMORA_LED3))BSP_LED_Toggle(LED3);
+		  if(!(tToogleLed%LED2_BASE))BSP_LED_Toggle(LED2);
+		  if(!(tToogleLed%LED3_BASE))BSP_LED_Toggle(LED3);
+		  tToogleLed++;
+		  if(tToogleLed==T_FINAL)tToogleLed=INICIO;
 		  delayInit(&estructura,DEMORA_BASE);
 
 	  }

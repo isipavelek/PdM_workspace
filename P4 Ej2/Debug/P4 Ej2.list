@@ -395,84 +395,83 @@ void debounceFSM_update(){
  8000528:	08000549 	.word	0x08000549
  800052c:	08000569 	.word	0x08000569
  8000530:	0800057d 	.word	0x0800057d
-	case (BUTTON_UP): if(!BSP_PB_GetState(BUTTON_USER))estado=BUTTON_FALLING;
+		case (BUTTON_UP): if(BSP_PB_GetState(BUTTON_USER))estado=BUTTON_FALLING;
  8000534:	2000      	movs	r0, #0
  8000536:	f000 f95f 	bl	80007f8 <BSP_PB_GetState>
  800053a:	4603      	mov	r3, r0
  800053c:	2b00      	cmp	r3, #0
- 800053e:	d12d      	bne.n	800059c <debounceFSM_update+0x8c>
+ 800053e:	d02d      	beq.n	800059c <debounceFSM_update+0x8c>
  8000540:	4b19      	ldr	r3, [pc, #100]	; (80005a8 <debounceFSM_update+0x98>)
  8000542:	2201      	movs	r2, #1
  8000544:	701a      	strb	r2, [r3, #0]
-
-					  break;
+						  break;
  8000546:	e029      	b.n	800059c <debounceFSM_update+0x8c>
-	case (BUTTON_FALLING):if(!BSP_PB_GetState(BUTTON_USER))estado=BUTTON_DOWN;
+		case (BUTTON_FALLING):if(!BSP_PB_GetState(BUTTON_USER))estado=BUTTON_UP;
  8000548:	2000      	movs	r0, #0
  800054a:	f000 f955 	bl	80007f8 <BSP_PB_GetState>
  800054e:	4603      	mov	r3, r0
  8000550:	2b00      	cmp	r3, #0
  8000552:	d103      	bne.n	800055c <debounceFSM_update+0x4c>
  8000554:	4b14      	ldr	r3, [pc, #80]	; (80005a8 <debounceFSM_update+0x98>)
- 8000556:	2202      	movs	r2, #2
+ 8000556:	2200      	movs	r2, #0
  8000558:	701a      	strb	r2, [r3, #0]
-						 else {
-							 buttonReleased();
-							 estado=BUTTON_UP;
-						 }
-						break;
+							 else {
+								 buttonPressed();
+								 estado=BUTTON_DOWN;
+							 }
+							break;
  800055a:	e022      	b.n	80005a2 <debounceFSM_update+0x92>
-							 buttonReleased();
- 800055c:	f000 f832 	bl	80005c4 <buttonReleased>
-							 estado=BUTTON_UP;
+								 buttonPressed();
+ 800055c:	f000 f826 	bl	80005ac <buttonPressed>
+								 estado=BUTTON_DOWN;
  8000560:	4b11      	ldr	r3, [pc, #68]	; (80005a8 <debounceFSM_update+0x98>)
- 8000562:	2200      	movs	r2, #0
+ 8000562:	2202      	movs	r2, #2
  8000564:	701a      	strb	r2, [r3, #0]
-						break;
+							break;
  8000566:	e01c      	b.n	80005a2 <debounceFSM_update+0x92>
-	case (BUTTON_DOWN):if(BSP_PB_GetState(BUTTON_USER))estado=BUTTON_RAISING;
+		case (BUTTON_DOWN):if(!BSP_PB_GetState(BUTTON_USER))estado=BUTTON_RAISING;
  8000568:	2000      	movs	r0, #0
  800056a:	f000 f945 	bl	80007f8 <BSP_PB_GetState>
  800056e:	4603      	mov	r3, r0
  8000570:	2b00      	cmp	r3, #0
- 8000572:	d015      	beq.n	80005a0 <debounceFSM_update+0x90>
+ 8000572:	d115      	bne.n	80005a0 <debounceFSM_update+0x90>
  8000574:	4b0c      	ldr	r3, [pc, #48]	; (80005a8 <debounceFSM_update+0x98>)
  8000576:	2203      	movs	r2, #3
  8000578:	701a      	strb	r2, [r3, #0]
-						break;
+							break;
  800057a:	e011      	b.n	80005a0 <debounceFSM_update+0x90>
-	case (BUTTON_RAISING):if(!BSP_PB_GetState(BUTTON_USER))estado=BUTTON_DOWN;
+		case (BUTTON_RAISING):if(BSP_PB_GetState(BUTTON_USER))estado=BUTTON_DOWN;
  800057c:	2000      	movs	r0, #0
  800057e:	f000 f93b 	bl	80007f8 <BSP_PB_GetState>
  8000582:	4603      	mov	r3, r0
  8000584:	2b00      	cmp	r3, #0
- 8000586:	d103      	bne.n	8000590 <debounceFSM_update+0x80>
+ 8000586:	d003      	beq.n	8000590 <debounceFSM_update+0x80>
  8000588:	4b07      	ldr	r3, [pc, #28]	; (80005a8 <debounceFSM_update+0x98>)
  800058a:	2202      	movs	r2, #2
  800058c:	701a      	strb	r2, [r3, #0]
-						 else {
-							 buttonPressed();
-							 estado=BUTTON_UP;
-						 }
-						break;
+							 else {
+
+								 buttonReleased();
+								 estado=BUTTON_UP;
+							 }
+							break;
  800058e:	e008      	b.n	80005a2 <debounceFSM_update+0x92>
-							 buttonPressed();
- 8000590:	f000 f80c 	bl	80005ac <buttonPressed>
-							 estado=BUTTON_UP;
+								 buttonReleased();
+ 8000590:	f000 f818 	bl	80005c4 <buttonReleased>
+								 estado=BUTTON_UP;
  8000594:	4b04      	ldr	r3, [pc, #16]	; (80005a8 <debounceFSM_update+0x98>)
  8000596:	2200      	movs	r2, #0
  8000598:	701a      	strb	r2, [r3, #0]
-						break;
+							break;
  800059a:	e002      	b.n	80005a2 <debounceFSM_update+0x92>
-					  break;
+						  break;
  800059c:	bf00      	nop
  800059e:	e000      	b.n	80005a2 <debounceFSM_update+0x92>
-						break;
+							break;
  80005a0:	bf00      	nop
 
 
-	}
-
+		}
 
 }
  80005a2:	bf00      	nop

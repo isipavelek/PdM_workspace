@@ -1,7 +1,77 @@
-23:53:31 **** Incremental Build of configuration Debug for project P4 Ej2 ****
+12:21:17 **** Incremental Build of configuration Debug for project P5 Ej1 ****
+make -j16 all 
+arm-none-eabi-size   P5\ Ej1.elf 
+   text	   data	    bss	    dec	    hex	filename
+   8848	     36	   1652	  10536	   2928	P5 Ej1.elf
+Finished building: default.size.stdout
+ 
+12:21:19 **** Incremental Build of configuration Debug for project P1_Ej1 ****
+make -j16 all 
+arm-none-eabi-size   P1_Ej1.elf 
+   text	   data	    bss	    dec	    hex	filename
+   6376	     32	   1568	   7976	   1f28	P1_Ej1.elf
+Finished building: default.size.stdout
+ 
+12:21:20 **** Incremental Build of configuration Debug for project P1_Ej2 ****
+make -j16 all 
+arm-none-eabi-size   P1_Ej2.elf 
+   text	   data	    bss	    dec	    hex	filename
+   6752	     36	   1572	   8360	   20a8	P1_Ej2.elf
+Finished building: default.size.stdout
+ 
+12:21:20 **** Incremental Build of configuration Debug for project P2 Ej1 ****
+make -j16 all 
+arm-none-eabi-size   P2\ Ej1.elf 
+   text	   data	    bss	    dec	    hex	filename
+   6372	     32	   1568	   7972	   1f24	P2 Ej1.elf
+Finished building: default.size.stdout
+ 
+12:21:21 **** Incremental Build of configuration Debug for project P2 Ej2 ****
+make -j16 all 
+arm-none-eabi-size   P2\ Ej2.elf 
+   text	   data	    bss	    dec	    hex	filename
+   6476	     32	   1568	   8076	   1f8c	P2 Ej2.elf
+Finished building: default.size.stdout
+ 
+12:21:21 **** Incremental Build of configuration Debug for project P3 Ej1 ****
+make -j16 all 
+arm-none-eabi-size   P3\ Ej1.elf 
+   text	   data	    bss	    dec	    hex	filename
+   6452	     32	   1576	   8060	   1f7c	P3 Ej1.elf
+Finished building: default.size.stdout
+ 
+12:21:22 **** Incremental Build of configuration Debug for project P4 Ej1 ****
+make -j16 all 
+arm-none-eabi-size   P4\ Ej1.elf 
+   text	   data	    bss	    dec	    hex	filename
+   6792	     36	   1588	   8416	   20e0	P4 Ej1.elf
+Finished building: default.size.stdout
+ 
+12:21:23 **** Incremental Build of configuration Debug for project P4 Ej2 ****
 make -j16 all 
 arm-none-eabi-size   P4\ Ej2.elf 
    text	   data	    bss	    dec	    hex	filename
    7080	     36	   1596	   8712	   2208	P4 Ej2.elf
+Finished building: default.size.stdout
+ 
+12:21:23 **** Incremental Build of configuration Debug for project P5 Ej1 ****
+make -j16 all 
+arm-none-eabi-size   P5\ Ej1.elf 
+   text	   data	    bss	    dec	    hex	filename
+   8848	     36	   1652	  10536	   2928	P5 Ej1.elf
+Finished building: default.size.stdout
+ 
+12:21:32 **** Incremental Build of configuration Debug for project P5 Ej1 ****
+make -j16 all 
+arm-none-eabi-size   P5\ Ej1.elf 
+   text	   data	    bss	    dec	    hex	filename
+   8848	     36	   1652	  10536	   2928	P5 Ej1.elf
+Finished building: default.size.stdout
+ 
+12:23:19 **** Incremental Build of configuration Debug for project P5 Ej1 ****
+make -j16 all 
+arm-none-eabi-size   P5\ Ej1.elf 
+   text	   data	    bss	    dec	    hex	filename
+   8848	     36	   1652	  10536	   2928	P5 Ej1.elf
 Finished building: default.size.stdout
  
