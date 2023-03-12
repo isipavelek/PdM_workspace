@@ -32,6 +32,8 @@
   */
 
 /* Private typedef -----------------------------------------------------------*/
+typedef unsigned char uchar;
+
 /* Private define ------------------------------------------------------------*/
 /* Private macro -------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
@@ -51,38 +53,20 @@ static void Error_Handler(void);
   * @retval None
   */
 
-
-
-
-typedef unsigned char uchar;
-
-#define LIM_SEC 3
-const char LEDS[LIM_SEC]={LED1,LED2,LED3};
-#define FALSE 0
-#define TRUE 1
-
-
-int main(void)
-{
+int main(void){
   HAL_Init();
 
   /* Configure the system clock to 180 MHz */
   SystemClock_Config();
 
   /* Initialize BSP Led for LED2 */
-  BSP_LED_Init(LED1);
+  BSP_LED_Init(LED2);
   BSP_PB_Init(BUTTON_USER, BUTTON_MODE_GPIO);
   //BSP_LED_On(LED1);
   debounceFSM_init();
   /* Infinite loop */
-  uartInit();
+  if(!uartInit())BSP_LED_On(LED2);
   while (1){
-//	  debounceFSM_update();
-
-	//  if(cambiar==TRUE)BSP_LED_Toogle(LED1);
-
-
-
   }
 }
 //if(BSP_PB_GetState(BUTTON_USER)){
@@ -165,9 +149,8 @@ static void Error_Handler(void)
 {
   /* Turn LED2 on */
   BSP_LED_On(LED2);
-  while (1)
-  {
-  }
+  while (1);
+
 }
 
 

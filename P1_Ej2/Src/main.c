@@ -25,19 +25,21 @@
   * @{
   */
 
-/** @addtogroup UART_Printf
-  * @{
-  */
-
 /* Private typedef -----------------------------------------------------------*/
+typedef unsigned char uchar;
 /* Private define ------------------------------------------------------------*/
-/* Private macro -------------------------------------------------------------*/
+#define LIM_SEC 3
+#define SECUENCIAS 2
+#define TIEMPO_DELAY 200
 /* Private variables ---------------------------------------------------------*/
-/* UART handler declaration */
-UART_HandleTypeDef UartHandle;
+const char SEC[SECUENCIAS][LIM_SEC]={
+						LED1,LED2,LED3,
+						LED1,LED3,LED2
+};
+/* Private macro -------------------------------------------------------------*/
+
 
 /* Private function prototypes -----------------------------------------------*/
-
 static void SystemClock_Config(void);
 static void Error_Handler(void);
 
@@ -49,26 +51,13 @@ static void Error_Handler(void);
   * @retval None
   */
 
-#define LIM_SEC 3
-#define SECUENCIAS 2
-typedef unsigned char uchar;
-
-const char SEC[SECUENCIAS][LIM_SEC]={
-						LED1,LED2,LED3,
-						LED1,LED3,LED2
-};
-
-
-int main(void)
-{
+int main(void){
 	uchar i=0;
 	uchar secuencia=0;
 
 	HAL_Init();
-
 	/* Configure the system clock to 180 MHz */
 	SystemClock_Config();
-
 	/* Initialize BSP Led for LED1 */
 	 BSP_LED_Init(LED1);
 	 BSP_LED_Init(LED2);
@@ -81,11 +70,11 @@ int main(void)
 	  {
 		  for(i=0;i<LIM_SEC;i++){
 			  BSP_LED_On(SEC[secuencia][i]);
-			  HAL_Delay(200);
+			  HAL_Delay(TIEMPO_DELAY);
 			  BSP_LED_Off(SEC[secuencia][i]);
-			  HAL_Delay(200);
+			  HAL_Delay(TIEMPO_DELAY);
 			  	if(BSP_PB_GetState(BUTTON_USER)){
-			  		while(BSP_PB_GetState(BUTTON_USER)); //si lo quito al mantener presionado luego de 200ms cambia de secuencia
+			  		while(BSP_PB_GetState(BUTTON_USER)); //Un antirebote senscillo (bloqueante)
 			  		secuencia^=1;
 					break;
 

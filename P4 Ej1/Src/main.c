@@ -30,43 +30,7 @@
   */
 
 /* Private typedef -----------------------------------------------------------*/
-/* Private define ------------------------------------------------------------*/
-/* Private macro -------------------------------------------------------------*/
-/* Private variables ---------------------------------------------------------*/
-/* UART handler declaration */
-UART_HandleTypeDef UartHandle;
-
-/* Private function prototypes -----------------------------------------------*/
-
-static void SystemClock_Config(void);
-static void Error_Handler(void);
-
-/* Private functions ---------------------------------------------------------*/
-
-/**
-  * @brief  Main program
-  * @param  None
-  * @retval None
-  */
-
-
-
-
 typedef unsigned char uchar;
-
-#define LIM_SEC 3
-const char LEDS[LIM_SEC]={LED1,LED2,LED3};
-#define OFF 0
-#define ON 1
-
-#define DEMORA_BASE 40
-
-void debounceFSM_init();		// debe cargar el estado inicial
-void debounceFSM_update();	// debe leer las entradas, resolver la lógica de
-					// transición de estados y actualizar las salidas
-void buttonPressed();			// debe togglear el LED1
-void buttonReleased();		// debe togglear el LED3
-
 typedef enum{
 	BUTTON_UP,
 	BUTTON_FALLING,
@@ -74,12 +38,34 @@ typedef enum{
 	BUTTON_RAISING,
 } debounceState_t;
 
+
+/* Private define ------------------------------------------------------------*/
+#define LIM_SEC 3
+const char LEDS[LIM_SEC]={LED1,LED2,LED3};
+#define OFF 0
+#define ON 1
+#define DEMORA_BASE 40
+
+/* Private macro -------------------------------------------------------------*/
+/* Private variables ---------------------------------------------------------*/
 uchar estado=BUTTON_UP;
 delay_t estructura;
+/* UART handler declaration */
+
+/* Private function prototypes -----------------------------------------------*/
+
+static void SystemClock_Config(void);
+static void Error_Handler(void);
+void debounceFSM_init();		// debe cargar el estado inicial
+void debounceFSM_update();	// debe leer las entradas, resolver la lógica de
+					// transición de estados y actualizar las salidas
+void buttonPressed();			// debe togglear el LED1
+void buttonReleased();		// debe togglear el LED3
 
 
-int main(void)
-{
+
+
+int main(void){
   HAL_Init();
 
   /* Configure the system clock to 180 MHz */
@@ -87,7 +73,6 @@ int main(void)
 
   /* Initialize BSP Led for LED2 */
   BSP_LED_Init(LED1);
-  BSP_LED_Init(LED2);
 
   BSP_PB_Init(BUTTON_USER, BUTTON_MODE_GPIO);
 
@@ -95,8 +80,6 @@ int main(void)
   /* Infinite loop */
   while (1){
 	  debounceFSM_update();
-
-
   }
 }
 //if(BSP_PB_GetState(BUTTON_USER)){
@@ -186,7 +169,6 @@ static void Error_Handler(void)
 
 void debounceFSM_init(){
     delayInit(&estructura,DEMORA_BASE);
-
 
 }
 void debounceFSM_update(){

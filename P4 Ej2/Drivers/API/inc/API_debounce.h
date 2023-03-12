@@ -19,6 +19,7 @@ void debounceFSM_update();	// debe leer las entradas, resolver la lógica de
 					// transición de estados y actualizar las salidas
 void buttonPressed();			// debe togglear el LED1
 void buttonReleased();		// debe togglear el LED3
+#define DEMORA_BASE 40
 
 typedef enum{
 	BUTTON_UP,

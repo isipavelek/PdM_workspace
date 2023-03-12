@@ -30,12 +30,15 @@
   */
 
 /* Private typedef -----------------------------------------------------------*/
+typedef unsigned char uchar;
+
 /* Private define ------------------------------------------------------------*/
 /* Private macro -------------------------------------------------------------*/
+#define LIM_SEC 3
+const char LEDS[LIM_SEC]={LED1,LED2,LED3};
+#define TIEMPO_DELAY 200
 /* Private variables ---------------------------------------------------------*/
 /* UART handler declaration */
-UART_HandleTypeDef UartHandle;
-
 /* Private function prototypes -----------------------------------------------*/
 
 static void SystemClock_Config(void);
@@ -48,33 +51,24 @@ static void Error_Handler(void);
   * @param  None
   * @retval None
   */
-typedef unsigned char uchar;
 
-#define LIM_SEC 3
-const char LEDS[LIM_SEC]={LED1,LED2,LED3};
+int main(void){
 
-
-int main(void)
-{
   uchar i=0;
   HAL_Init();
-
   /* Configure the system clock to 180 MHz */
   SystemClock_Config();
-
   /* Initialize BSP Led for LED2 */
   BSP_LED_Init(LED1);
   BSP_LED_Init(LED2);
   BSP_LED_Init(LED3);
-
-
   /* Infinite loop */
   while (1){
 	for(i=0;i<sizeof(LEDS);i++){
 		  BSP_LED_Toggle(LEDS[i]);
-		  HAL_Delay(200);
+		  HAL_Delay(TIEMPO_DELAY);
 		  BSP_LED_Toggle(LEDS[i]);
-		  HAL_Delay(200);
+		  HAL_Delay(TIEMPO_DELAY);
 	}
   }
 }
@@ -123,14 +117,12 @@ static void SystemClock_Config(void)
   RCC_OscInitStruct.PLL.PLLN = 360;
   RCC_OscInitStruct.PLL.PLLP = RCC_PLLP_DIV2;
   RCC_OscInitStruct.PLL.PLLQ = 7;
-  if(HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK)
-  {
+  if(HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK){
     /* Initialization Error */
     Error_Handler();
   }
   
-  if(HAL_PWREx_EnableOverDrive() != HAL_OK)
-  {
+  if(HAL_PWREx_EnableOverDrive() != HAL_OK){
     /* Initialization Error */
     Error_Handler();
   }
@@ -142,8 +134,7 @@ static void SystemClock_Config(void)
   RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
   RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV4;  
   RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV2;  
-  if(HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_5) != HAL_OK)
-  {
+  if(HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_5) != HAL_OK){
     /* Initialization Error */
     Error_Handler();
   }
@@ -157,9 +148,7 @@ static void Error_Handler(void)
 {
   /* Turn LED2 on */
   BSP_LED_On(LED2);
-  while (1)
-  {
-  }
+  while (1);
 }
 
 #ifdef  USE_FULL_ASSERT

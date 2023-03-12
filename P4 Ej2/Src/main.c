@@ -31,12 +31,23 @@
   */
 
 /* Private typedef -----------------------------------------------------------*/
+typedef unsigned char uchar;
+
 /* Private define ------------------------------------------------------------*/
+
+#define FALSE 0
+#define TRUE 1
+
+
+
+
+#define DEMORA_100 100
+#define DEMORA_500 500
 /* Private macro -------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
-/* UART handler declaration */
-UART_HandleTypeDef UartHandle;
-
+bool_t readKey();
+bool_t demora=FALSE;
+extern bool_t tecla;
 /* Private function prototypes -----------------------------------------------*/
 
 static void SystemClock_Config(void);
@@ -50,20 +61,7 @@ static void Error_Handler(void);
   * @retval None
   */
 
-typedef unsigned char uchar;
-
-#define FALSE 0
-#define TRUE 1
-
-bool_t readKey();
-
-extern bool_t tecla;
-bool_t demora=FALSE;
-#define DEMORA_100 100
-#define DEMORA_500 500
-
-int main(void)
-{
+int main(void){
   delay_t estructura;
   HAL_Init();
   /* Configure the system clock to 180 MHz */
@@ -78,18 +76,12 @@ int main(void)
   /* Infinite loop */
   while (1){
 	  debounceFSM_update();
-
-
 	  if(delayRead(&estructura)==TRUE){
 	  		  BSP_LED_Toggle(LED2);
 	  		  if(!demora)delayInit(&estructura,DEMORA_100);
 	  		  else delayInit(&estructura,DEMORA_500);
 	  }
-
 	  if(readKey()==TRUE)demora^=1;
-
-
-
   }
 }
 

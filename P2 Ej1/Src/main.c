@@ -30,11 +30,14 @@
   */
 
 /* Private typedef -----------------------------------------------------------*/
+typedef unsigned char uchar;
+
 /* Private define ------------------------------------------------------------*/
+#define DEMORA 1000
+
 /* Private macro -------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
 /* UART handler declaration */
-UART_HandleTypeDef UartHandle;
 
 /* Private function prototypes -----------------------------------------------*/
 
@@ -48,10 +51,7 @@ static void Error_Handler(void);
   * @param  None
   * @retval None
   */
-typedef unsigned char uchar;
-#define DEMORA 1000
-#define FALSE 0
-#define TRUE 1
+
 
 int main(void)
 {
@@ -70,7 +70,7 @@ int main(void)
   while (1){
 
 
-	  if(delayRead(&estructura)==TRUE){
+	  if(delayRead(&estructura)==true){
 		  BSP_LED_Toggle(LED1);
 		  delayInit(&estructura,DEMORA);
 	  }
@@ -81,15 +81,18 @@ int main(void)
 void delayInit( delay_t * delay, tick_t duration ){
 	delay->startTime=HAL_GetTick();
 	delay->duration=duration;
-	delay->running=FALSE;
+	delay->running=false;
 
 }
 bool_t delayRead( delay_t * delay ){
-	if(delay->running)delay->running=TRUE;
-	if(HAL_GetTick()-delay->startTime>=delay->duration){
-		delay->running=FALSE;
-		return 1;
-	}else return 0;
+	if((delay->running)==false)delay->running=true;
+	else{
+		if(HAL_GetTick()-delay->startTime>=delay->duration){
+			delay->running=false;
+			return true;
+		}
+	}
+	return false;
 }
 
 void delayWrite( delay_t * delay, tick_t duration ){

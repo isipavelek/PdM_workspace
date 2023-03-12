@@ -10,8 +10,6 @@
 #include "stm32f4xx_nucleo_144.h" 	/* <- BSP include */
 #include <stdbool.h>
 
-#define FALSE 0
-#define TRUE 1
 
 #ifndef API_INC_API_DELAY_H_
 #define API_INC_API_DELAY_H_

@@ -1,77 +1,17 @@
-12:21:17 **** Incremental Build of configuration Debug for project P5 Ej1 ****
+22:05:37 **** Incremental Build of configuration Debug for project P5 Ej2 ****
 make -j16 all 
-arm-none-eabi-size   P5\ Ej1.elf 
+arm-none-eabi-gcc "../Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DSTM32 -DSTM32F429ZITx -DSTM32F4 -DNUCLEO_F429ZI -DUSE_HAL_DRIVER -DSTM32F429xx -c -I../Inc -I"C:/Users/ipave/Documents/GitHub/PdM_workspace/P5 Ej2/Drivers/STM32F4xx_HAL_Driver/Inc" -I"C:/Users/ipave/Documents/GitHub/PdM_workspace/P5 Ej2/Drivers/CMSIS/Include" -I"C:/Users/ipave/Documents/GitHub/PdM_workspace/P5 Ej2/Drivers/CMSIS/Device/ST/STM32F4xx/Include" -I"C:/Users/ipave/Documents/GitHub/PdM_workspace/P5 Ej2/Drivers/BSP/STM32F4xx_Nucleo_144" -I"C:/Users/ipave/Documents/GitHub/PdM_workspace/P5 Ej2/Drivers/Core/Inc" -I"C:/Users/ipave/Documents/GitHub/PdM_workspace/P5 Ej2/Drivers/API/inc" -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Src/main.d" -MT"Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/main.o"
+arm-none-eabi-gcc "../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_msp.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DSTM32 -DSTM32F429ZITx -DSTM32F4 -DNUCLEO_F429ZI -DUSE_HAL_DRIVER -DSTM32F429xx -c -I../Inc -I"C:/Users/ipave/Documents/GitHub/PdM_workspace/P5 Ej2/Drivers/STM32F4xx_HAL_Driver/Inc" -I"C:/Users/ipave/Documents/GitHub/PdM_workspace/P5 Ej2/Drivers/CMSIS/Include" -I"C:/Users/ipave/Documents/GitHub/PdM_workspace/P5 Ej2/Drivers/CMSIS/Device/ST/STM32F4xx/Include" -I"C:/Users/ipave/Documents/GitHub/PdM_workspace/P5 Ej2/Drivers/BSP/STM32F4xx_Nucleo_144" -I"C:/Users/ipave/Documents/GitHub/PdM_workspace/P5 Ej2/Drivers/Core/Inc" -I"C:/Users/ipave/Documents/GitHub/PdM_workspace/P5 Ej2/Drivers/API/inc" -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_msp.d" -MT"Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_msp.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_msp.o"
+arm-none-eabi-gcc "../Drivers/Core/Src/stm32f4xx_it.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DSTM32 -DSTM32F429ZITx -DSTM32F4 -DNUCLEO_F429ZI -DUSE_HAL_DRIVER -DSTM32F429xx -c -I../Inc -I"C:/Users/ipave/Documents/GitHub/PdM_workspace/P5 Ej2/Drivers/STM32F4xx_HAL_Driver/Inc" -I"C:/Users/ipave/Documents/GitHub/PdM_workspace/P5 Ej2/Drivers/CMSIS/Include" -I"C:/Users/ipave/Documents/GitHub/PdM_workspace/P5 Ej2/Drivers/CMSIS/Device/ST/STM32F4xx/Include" -I"C:/Users/ipave/Documents/GitHub/PdM_workspace/P5 Ej2/Drivers/BSP/STM32F4xx_Nucleo_144" -I"C:/Users/ipave/Documents/GitHub/PdM_workspace/P5 Ej2/Drivers/Core/Inc" -I"C:/Users/ipave/Documents/GitHub/PdM_workspace/P5 Ej2/Drivers/API/inc" -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Drivers/Core/Src/stm32f4xx_it.d" -MT"Drivers/Core/Src/stm32f4xx_it.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Drivers/Core/Src/stm32f4xx_it.o"
+arm-none-eabi-gcc "../Drivers/API/src/API_uart.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DSTM32 -DSTM32F429ZITx -DSTM32F4 -DNUCLEO_F429ZI -DUSE_HAL_DRIVER -DSTM32F429xx -c -I../Inc -I"C:/Users/ipave/Documents/GitHub/PdM_workspace/P5 Ej2/Drivers/STM32F4xx_HAL_Driver/Inc" -I"C:/Users/ipave/Documents/GitHub/PdM_workspace/P5 Ej2/Drivers/CMSIS/Include" -I"C:/Users/ipave/Documents/GitHub/PdM_workspace/P5 Ej2/Drivers/CMSIS/Device/ST/STM32F4xx/Include" -I"C:/Users/ipave/Documents/GitHub/PdM_workspace/P5 Ej2/Drivers/BSP/STM32F4xx_Nucleo_144" -I"C:/Users/ipave/Documents/GitHub/PdM_workspace/P5 Ej2/Drivers/Core/Inc" -I"C:/Users/ipave/Documents/GitHub/PdM_workspace/P5 Ej2/Drivers/API/inc" -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Drivers/API/src/API_uart.d" -MT"Drivers/API/src/API_uart.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Drivers/API/src/API_uart.o"
+arm-none-eabi-gcc -o "P5 Ej2.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\ipave\Documents\GitHub\PdM_workspace\P5 Ej2\STM32F429ZITX_FLASH.ld" --specs=nosys.specs -Wl,-Map="P5 Ej2.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: P5 Ej2.elf
+ 
+arm-none-eabi-size   P5\ Ej2.elf 
+arm-none-eabi-objdump -h -S  P5\ Ej2.elf  > "P5 Ej2.list"
    text	   data	    bss	    dec	    hex	filename
-   8848	     36	   1652	  10536	   2928	P5 Ej1.elf
+   9212	     68	   1652	  10932	   2ab4	P5 Ej2.elf
 Finished building: default.size.stdout
  
-12:21:19 **** Incremental Build of configuration Debug for project P1_Ej1 ****
-make -j16 all 
-arm-none-eabi-size   P1_Ej1.elf 
-   text	   data	    bss	    dec	    hex	filename
-   6376	     32	   1568	   7976	   1f28	P1_Ej1.elf
-Finished building: default.size.stdout
- 
-12:21:20 **** Incremental Build of configuration Debug for project P1_Ej2 ****
-make -j16 all 
-arm-none-eabi-size   P1_Ej2.elf 
-   text	   data	    bss	    dec	    hex	filename
-   6752	     36	   1572	   8360	   20a8	P1_Ej2.elf
-Finished building: default.size.stdout
- 
-12:21:20 **** Incremental Build of configuration Debug for project P2 Ej1 ****
-make -j16 all 
-arm-none-eabi-size   P2\ Ej1.elf 
-   text	   data	    bss	    dec	    hex	filename
-   6372	     32	   1568	   7972	   1f24	P2 Ej1.elf
-Finished building: default.size.stdout
- 
-12:21:21 **** Incremental Build of configuration Debug for project P2 Ej2 ****
-make -j16 all 
-arm-none-eabi-size   P2\ Ej2.elf 
-   text	   data	    bss	    dec	    hex	filename
-   6476	     32	   1568	   8076	   1f8c	P2 Ej2.elf
-Finished building: default.size.stdout
- 
-12:21:21 **** Incremental Build of configuration Debug for project P3 Ej1 ****
-make -j16 all 
-arm-none-eabi-size   P3\ Ej1.elf 
-   text	   data	    bss	    dec	    hex	filename
-   6452	     32	   1576	   8060	   1f7c	P3 Ej1.elf
-Finished building: default.size.stdout
- 
-12:21:22 **** Incremental Build of configuration Debug for project P4 Ej1 ****
-make -j16 all 
-arm-none-eabi-size   P4\ Ej1.elf 
-   text	   data	    bss	    dec	    hex	filename
-   6792	     36	   1588	   8416	   20e0	P4 Ej1.elf
-Finished building: default.size.stdout
- 
-12:21:23 **** Incremental Build of configuration Debug for project P4 Ej2 ****
-make -j16 all 
-arm-none-eabi-size   P4\ Ej2.elf 
-   text	   data	    bss	    dec	    hex	filename
-   7080	     36	   1596	   8712	   2208	P4 Ej2.elf
-Finished building: default.size.stdout
- 
-12:21:23 **** Incremental Build of configuration Debug for project P5 Ej1 ****
-make -j16 all 
-arm-none-eabi-size   P5\ Ej1.elf 
-   text	   data	    bss	    dec	    hex	filename
-   8848	     36	   1652	  10536	   2928	P5 Ej1.elf
-Finished building: default.size.stdout
- 
-12:21:32 **** Incremental Build of configuration Debug for project P5 Ej1 ****
-make -j16 all 
-arm-none-eabi-size   P5\ Ej1.elf 
-   text	   data	    bss	    dec	    hex	filename
-   8848	     36	   1652	  10536	   2928	P5 Ej1.elf
-Finished building: default.size.stdout
- 
-12:23:19 **** Incremental Build of configuration Debug for project P5 Ej1 ****
-make -j16 all 
-arm-none-eabi-size   P5\ Ej1.elf 
-   text	   data	    bss	    dec	    hex	filename
-   8848	     36	   1652	  10536	   2928	P5 Ej1.elf
-Finished building: default.size.stdout
+Finished building: P5 Ej2.list
  

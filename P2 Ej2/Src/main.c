@@ -30,11 +30,23 @@
   */
 
 /* Private typedef -----------------------------------------------------------*/
+typedef unsigned char uchar;
+
 /* Private define ------------------------------------------------------------*/
+#define DEMORA_BASE 100
+#define DEMORA_LED1 100
+#define LED1_BASE (DEMORA_LED1/DEMORA_BASE+1)	//suma 1 dado que el indice arranca en 1
+
+#define DEMORA_LED2 500
+#define LED2_BASE (DEMORA_LED2/DEMORA_BASE+1)  ////6 veces la demora base 500ms
+#define DEMORA_LED3 1000
+#define LED3_BASE (DEMORA_LED3/DEMORA_BASE+1)	//11 veces la demora base 500ms
+
+#define INICIO 1
+#define T_FINAL (LED3_BASE+1)		//al desbordar vuelve a empezar
 /* Private macro -------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
 /* UART handler declaration */
-UART_HandleTypeDef UartHandle;
 
 /* Private function prototypes -----------------------------------------------*/
 
@@ -48,22 +60,6 @@ static void Error_Handler(void);
   * @param  None
   * @retval None
   */
-typedef unsigned char uchar;
-
-#define DEMORA_BASE 100
-#define DEMORA_LED1 100
-#define LED1_BASE (DEMORA_LED1/DEMORA_BASE+1)	//suma 1 dado que el indice arranca en 1
-
-#define DEMORA_LED2 500
-#define LED2_BASE (DEMORA_LED2/DEMORA_BASE+1)  ////6 veces la demora base 500ms
-#define DEMORA_LED3 1000
-#define LED3_BASE (DEMORA_LED3/DEMORA_BASE+1)	//11 veces la demora base 500ms
-
-#define INICIO 1
-#define T_FINAL (LED3_BASE+1)		//al desbordar vuelve a empezar
-
-#define FALSE 0
-#define TRUE 1
 
 int main(void)
 {
@@ -83,7 +79,7 @@ int main(void)
   /* Infinite loop */
   while (1){
 
-	  if(delayRead(&estructura)==TRUE){
+	  if(delayRead(&estructura)==true){
 		  BSP_LED_Toggle(LED1);
 //		  if(!(tToogleLed%DEMORA_LED1))BSP_LED_Toggle(LED1);
 		  if(!(tToogleLed%LED2_BASE))BSP_LED_Toggle(LED2);
@@ -100,16 +96,20 @@ int main(void)
 void delayInit( delay_t * delay, tick_t duration ){
 	delay->startTime=HAL_GetTick();
 	delay->duration=duration;
-	delay->running=FALSE;
+	delay->running=false;
 
 }
 bool_t delayRead( delay_t * delay ){
-	if(delay->running)delay->running=TRUE;
-	if(HAL_GetTick()-delay->startTime>=delay->duration){
-		delay->running=FALSE;
-		return 1;
-	}else return 0;
+	if((delay->running)==false)delay->running=true;
+	else{
+		if(HAL_GetTick()-delay->startTime>=delay->duration){
+			delay->running=false;
+			return true;
+		}
+	}
+	return false;
 }
+
 
 void delayWrite( delay_t * delay, tick_t duration ){
 	delay->duration=duration;

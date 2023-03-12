@@ -29,23 +29,23 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   ALLOC
  12 .ARM.attributes 00000030  00000000  00000000  00020018  2**0
                   CONTENTS, READONLY
- 13 .debug_info   00004c89  00000000  00000000  00020048  2**0
+ 13 .debug_info   000047aa  00000000  00000000  00020048  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 14 .debug_abbrev 00001175  00000000  00000000  00024cd1  2**0
+ 14 .debug_abbrev 00001154  00000000  00000000  000247f2  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 15 .debug_aranges 000004d0  00000000  00000000  00025e48  2**3
+ 15 .debug_aranges 000004d0  00000000  00000000  00025948  2**3
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 16 .debug_ranges 00000428  00000000  00000000  00026318  2**3
+ 16 .debug_ranges 00000428  00000000  00000000  00025e18  2**3
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 17 .debug_macro  00024d09  00000000  00000000  00026740  2**0
+ 17 .debug_macro  00024d0f  00000000  00000000  00026240  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 18 .debug_line   0000719a  00000000  00000000  0004b449  2**0
+ 18 .debug_line   0000719a  00000000  00000000  0004af4f  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 19 .debug_str    000e1087  00000000  00000000  000525e3  2**0
+ 19 .debug_str    000e0cd8  00000000  00000000  000520e9  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 20 .comment      00000050  00000000  00000000  0013366a  2**0
+ 20 .comment      00000050  00000000  00000000  00132dc1  2**0
                   CONTENTS, READONLY
- 21 .debug_frame  00001118  00000000  00000000  001336bc  2**2
+ 21 .debug_frame  00001118  00000000  00000000  00132e14  2**2
                   CONTENTS, READONLY, DEBUGGING, OCTETS
 
 Disassembly of section .text:
@@ -3468,25 +3468,24 @@ __weak uint32_t HAL_RCC_GetSysClockFreq(void)
  80016dc:	007a1200 	.word	0x007a1200
 
 080016e0 <main>:
-#define LIM_SEC 3
-const char LEDS[LIM_SEC]={LED1,LED2,LED3};
+  * @brief  Main program
+  * @param  None
+  * @retval None
+  */
 
-
-int main(void)
-{
+int main(void){
  80016e0:	b580      	push	{r7, lr}
  80016e2:	b082      	sub	sp, #8
  80016e4:	af00      	add	r7, sp, #0
+
   uchar i=0;
  80016e6:	2300      	movs	r3, #0
  80016e8:	71fb      	strb	r3, [r7, #7]
   HAL_Init();
  80016ea:	f7fe ffe9 	bl	80006c0 <HAL_Init>
-
   /* Configure the system clock to 180 MHz */
   SystemClock_Config();
  80016ee:	f000 f827 	bl	8001740 <SystemClock_Config>
-
   /* Initialize BSP Led for LED2 */
   BSP_LED_Init(LED1);
  80016f2:	2000      	movs	r0, #0
@@ -3497,8 +3496,6 @@ int main(void)
   BSP_LED_Init(LED3);
  80016fe:	2002      	movs	r0, #2
  8001700:	f7fe fef6 	bl	80004f0 <BSP_LED_Init>
-
-
   /* Infinite loop */
   while (1){
 	for(i=0;i<sizeof(LEDS);i++){
@@ -3511,7 +3508,7 @@ int main(void)
  800170e:	5cd3      	ldrb	r3, [r2, r3]
  8001710:	4618      	mov	r0, r3
  8001712:	f7fe ff57 	bl	80005c4 <BSP_LED_Toggle>
-		  HAL_Delay(200);
+		  HAL_Delay(TIEMPO_DELAY);
  8001716:	20c8      	movs	r0, #200	; 0xc8
  8001718:	f7ff f83e 	bl	8000798 <HAL_Delay>
 		  BSP_LED_Toggle(LEDS[i]);
@@ -3520,7 +3517,7 @@ int main(void)
  8001720:	5cd3      	ldrb	r3, [r2, r3]
  8001722:	4618      	mov	r0, r3
  8001724:	f7fe ff4e 	bl	80005c4 <BSP_LED_Toggle>
-		  HAL_Delay(200);
+		  HAL_Delay(TIEMPO_DELAY);
  8001728:	20c8      	movs	r0, #200	; 0xc8
  800172a:	f7ff f835 	bl	8000798 <HAL_Delay>
 	for(i=0;i<sizeof(LEDS);i++){
@@ -3603,25 +3600,23 @@ static void SystemClock_Config(void)
   RCC_OscInitStruct.PLL.PLLQ = 7;
  80017a0:	2307      	movs	r3, #7
  80017a2:	63bb      	str	r3, [r7, #56]	; 0x38
-  if(HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK)
+  if(HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK){
  80017a4:	f107 030c 	add.w	r3, r7, #12
  80017a8:	4618      	mov	r0, r3
  80017aa:	f7ff fb35 	bl	8000e18 <HAL_RCC_OscConfig>
  80017ae:	4603      	mov	r3, r0
  80017b0:	2b00      	cmp	r3, #0
  80017b2:	d001      	beq.n	80017b8 <SystemClock_Config+0x78>
-  {
     /* Initialization Error */
     Error_Handler();
  80017b4:	f000 f826 	bl	8001804 <Error_Handler>
   }
   
-  if(HAL_PWREx_EnableOverDrive() != HAL_OK)
+  if(HAL_PWREx_EnableOverDrive() != HAL_OK){
  80017b8:	f7ff fade 	bl	8000d78 <HAL_PWREx_EnableOverDrive>
  80017bc:	4603      	mov	r3, r0
  80017be:	2b00      	cmp	r3, #0
  80017c0:	d001      	beq.n	80017c6 <SystemClock_Config+0x86>
-  {
     /* Initialization Error */
     Error_Handler();
  80017c2:	f000 f81f 	bl	8001804 <Error_Handler>
@@ -3644,7 +3639,7 @@ static void SystemClock_Config(void)
   RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV2;  
  80017d8:	f44f 5380 	mov.w	r3, #4096	; 0x1000
  80017dc:	64fb      	str	r3, [r7, #76]	; 0x4c
-  if(HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_5) != HAL_OK)
+  if(HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_5) != HAL_OK){
  80017de:	f107 033c 	add.w	r3, r7, #60	; 0x3c
  80017e2:	2105      	movs	r1, #5
  80017e4:	4618      	mov	r0, r3
@@ -3652,7 +3647,6 @@ static void SystemClock_Config(void)
  80017ea:	4603      	mov	r3, r0
  80017ec:	2b00      	cmp	r3, #0
  80017ee:	d001      	beq.n	80017f4 <SystemClock_Config+0xb4>
-  {
     /* Initialization Error */
     Error_Handler();
  80017f0:	f000 f808 	bl	8001804 <Error_Handler>
@@ -3678,7 +3672,7 @@ static void Error_Handler(void)
   BSP_LED_On(LED2);
  8001808:	2001      	movs	r0, #1
  800180a:	f7fe fec1 	bl	8000590 <BSP_LED_On>
-  while (1)
+  while (1);
  800180e:	e7fe      	b.n	800180e <Error_Handler+0xa>
 
 08001810 <Reset_Handler>:

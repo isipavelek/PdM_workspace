@@ -10,13 +10,10 @@
 
 unsigned char estado=BUTTON_UP;
 delay_t estructura;
-#define DEMORA_BASE 40
-
 bool_t tecla=0;
 
 void debounceFSM_init(){
     delayInit(&estructura,DEMORA_BASE);
-
 	estado=BUTTON_UP;
 
 }
@@ -40,19 +37,13 @@ void debounceFSM_update(){
 								 estado=BUTTON_UP;
 							 }
 							break;
-
-
 		}
 
 }
 
 void buttonPressed(){
-
 	tecla=1;
-
 }
 void buttonReleased(){
-
 	tecla=0;
-
 }

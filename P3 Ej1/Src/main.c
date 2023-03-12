@@ -30,11 +30,18 @@
   */
 
 /* Private typedef -----------------------------------------------------------*/
+typedef unsigned char uchar;
 /* Private define ------------------------------------------------------------*/
+#define LIM_SEC 3
+const char LEDS[LIM_SEC]={LED1,LED2,LED3};
+#define OFF 0
+#define ON 1
+#define DEMORA_BASE 200
+
 /* Private macro -------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
+bool estado=OFF;
 /* UART handler declaration */
-UART_HandleTypeDef UartHandle;
 
 /* Private function prototypes -----------------------------------------------*/
 
@@ -48,24 +55,7 @@ static void Error_Handler(void);
   * @param  None
   * @retval None
   */
-typedef unsigned char uchar;
-
-#define LIM_SEC 3
-const char LEDS[LIM_SEC]={LED1,LED2,LED3};
-#define FALSE 0
-#define TRUE 1
-
-#define OFF 0
-#define ON 1
-
-bool estado=OFF;
-
-
-#define DEMORA_BASE 200
-
-
-int main(void)
-{
+int main(void){
   uchar i=0;
   HAL_Init();
   delay_t estructura;
@@ -82,7 +72,7 @@ int main(void)
   /* Infinite loop */
   while (1){
 
-	  if(delayRead(&estructura)==TRUE){
+	  if(delayRead(&estructura)==true){
 		  BSP_LED_Toggle(LEDS[i]);
   		  if(estado==ON){
   			  i++;
