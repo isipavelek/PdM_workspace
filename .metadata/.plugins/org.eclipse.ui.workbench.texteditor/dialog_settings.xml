@@ -6,8 +6,9 @@
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
-		<item key="selection" value="&#x09;HAL_UART_MspInit"/>
+		<item key="selection" value="Init"/>
 		<list key="findhistory">
+			<item value="init"/>
 			<item value="&#x09;HAL_UART_MspInit"/>
 			<item value="USART"/>
 			<item value="uart"/>

@@ -1,19 +1,10 @@
-22:00:13 **** Incremental Build of configuration Debug for project P4 Ej2 ****
+18:45:31 **** Incremental Build of configuration Debug for project P4 Ej2 ****
 make -j16 all 
-arm-none-eabi-gcc "../Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DSTM32 -DSTM32F429ZITx -DSTM32F4 -DNUCLEO_F429ZI -DUSE_HAL_DRIVER -DSTM32F429xx -c -I../Inc -I"C:/Users/ipave/Documents/GitHub/PdM_workspace/P4 Ej2/Drivers/STM32F4xx_HAL_Driver/Inc" -I"C:/Users/ipave/Documents/GitHub/PdM_workspace/P4 Ej2/Drivers/CMSIS/Include" -I"C:/Users/ipave/Documents/GitHub/PdM_workspace/P4 Ej2/Drivers/CMSIS/Device/ST/STM32F4xx/Include" -I"C:/Users/ipave/Documents/GitHub/PdM_workspace/P4 Ej2/Drivers/BSP/STM32F4xx_Nucleo_144" -I"C:/Users/ipave/Documents/GitHub/PdM_workspace/P4 Ej2/Drivers/Core/Inc" -I"C:/Users/ipave/Documents/GitHub/PdM_workspace/P4 Ej2/Drivers/API/inc" -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Src/main.d" -MT"Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/main.o"
-arm-none-eabi-gcc "../Drivers/API/src/API_debounce.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DSTM32 -DSTM32F429ZITx -DSTM32F4 -DNUCLEO_F429ZI -DUSE_HAL_DRIVER -DSTM32F429xx -c -I../Inc -I"C:/Users/ipave/Documents/GitHub/PdM_workspace/P4 Ej2/Drivers/STM32F4xx_HAL_Driver/Inc" -I"C:/Users/ipave/Documents/GitHub/PdM_workspace/P4 Ej2/Drivers/CMSIS/Include" -I"C:/Users/ipave/Documents/GitHub/PdM_workspace/P4 Ej2/Drivers/CMSIS/Device/ST/STM32F4xx/Include" -I"C:/Users/ipave/Documents/GitHub/PdM_workspace/P4 Ej2/Drivers/BSP/STM32F4xx_Nucleo_144" -I"C:/Users/ipave/Documents/GitHub/PdM_workspace/P4 Ej2/Drivers/Core/Inc" -I"C:/Users/ipave/Documents/GitHub/PdM_workspace/P4 Ej2/Drivers/API/inc" -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Drivers/API/src/API_debounce.d" -MT"Drivers/API/src/API_debounce.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Drivers/API/src/API_debounce.o"
-arm-none-eabi-gcc "../Drivers/API/src/API_delay.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DSTM32 -DSTM32F429ZITx -DSTM32F4 -DNUCLEO_F429ZI -DUSE_HAL_DRIVER -DSTM32F429xx -c -I../Inc -I"C:/Users/ipave/Documents/GitHub/PdM_workspace/P4 Ej2/Drivers/STM32F4xx_HAL_Driver/Inc" -I"C:/Users/ipave/Documents/GitHub/PdM_workspace/P4 Ej2/Drivers/CMSIS/Include" -I"C:/Users/ipave/Documents/GitHub/PdM_workspace/P4 Ej2/Drivers/CMSIS/Device/ST/STM32F4xx/Include" -I"C:/Users/ipave/Documents/GitHub/PdM_workspace/P4 Ej2/Drivers/BSP/STM32F4xx_Nucleo_144" -I"C:/Users/ipave/Documents/GitHub/PdM_workspace/P4 Ej2/Drivers/Core/Inc" -I"C:/Users/ipave/Documents/GitHub/PdM_workspace/P4 Ej2/Drivers/API/inc" -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Drivers/API/src/API_delay.d" -MT"Drivers/API/src/API_delay.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Drivers/API/src/API_delay.o"
-arm-none-eabi-gcc -o "P4 Ej2.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\ipave\Documents\GitHub\PdM_workspace\P4 Ej2\STM32F429ZITX_FLASH.ld" --specs=nosys.specs -Wl,-Map="P4 Ej2.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
-Finished building target: P4 Ej2.elf
- 
 arm-none-eabi-size   P4\ Ej2.elf 
-arm-none-eabi-objdump -h -S  P4\ Ej2.elf  > "P4 Ej2.list"
    text	   data	    bss	    dec	    hex	filename
-   7088	     36	   1596	   8720	   2210	P4 Ej2.elf
+   7164	     36	   1596	   8796	   225c	P4 Ej2.elf
 Finished building: default.size.stdout
  
-Finished building: P4 Ej2.list
- 
 
-22:00:14 Build Finished. 0 errors, 0 warnings. (took 784ms)
+18:45:31 Build Finished. 0 errors, 0 warnings. (took 406ms)
 

@@ -35,15 +35,15 @@ typedef unsigned char uchar;
 /* Private define ------------------------------------------------------------*/
 #define DEMORA_BASE 100
 #define DEMORA_LED1 100
-#define LED1_BASE (DEMORA_LED1/DEMORA_BASE+1)	//suma 1 dado que el indice arranca en 1
+#define LED1_BASE (DEMORA_LED1/DEMORA_BASE)	//suma 1 dado que el indice arranca en 1
 
 #define DEMORA_LED2 500
-#define LED2_BASE (DEMORA_LED2/DEMORA_BASE+1)  ////6 veces la demora base 500ms
+#define LED2_BASE (DEMORA_LED2/DEMORA_BASE)  ////6 veces la demora base 500ms
 #define DEMORA_LED3 1000
-#define LED3_BASE (DEMORA_LED3/DEMORA_BASE+1)	//11 veces la demora base 500ms
+#define LED3_BASE (DEMORA_LED3/DEMORA_BASE)	//11 veces la demora base 500ms
 
-#define INICIO 1
-#define T_FINAL (LED3_BASE+1)		//al desbordar vuelve a empezar
+#define INICIO 0
+#define T_FINAL (LED3_BASE)		//al desbordar vuelve a empezar
 /* Private macro -------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
 /* UART handler declaration */
@@ -86,21 +86,21 @@ int main(void)
 		  if(!(tToogleLed%LED3_BASE))BSP_LED_Toggle(LED3);
 		  tToogleLed++;
 		  if(tToogleLed==T_FINAL)tToogleLed=INICIO;
-		  delayInit(&estructura,DEMORA_BASE);
-
 	  }
-
   }
 }
 
 void delayInit( delay_t * delay, tick_t duration ){
-	delay->startTime=HAL_GetTick();
 	delay->duration=duration;
 	delay->running=false;
 
 }
 bool_t delayRead( delay_t * delay ){
-	if((delay->running)==false)delay->running=true;
+	if((delay->running)==false){
+		delay->running=true;
+		delay->startTime=HAL_GetTick();
+
+	}
 	else{
 		if(HAL_GetTick()-delay->startTime>=delay->duration){
 			delay->running=false;

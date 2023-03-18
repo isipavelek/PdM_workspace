@@ -6,39 +6,58 @@
  */
 
 #include "API_debounce.h"
-#include "API_delay.h"
 
-unsigned char estado=BUTTON_UP;
-delay_t estructura;
+
+static unsigned char estado=BUTTON_UP;
+static delay_t estructura_tiempo;
 bool_t tecla=0;
 
-void debounceFSM_init(){
-    delayInit(&estructura,DEMORA_BASE);
-	estado=BUTTON_UP;
+bool_t readKey(void){
+
+	if(tecla==true){
+		tecla=0;
+		return true;
+	}
+	return false;
 
 }
-void debounceFSM_update(){
 
+void debounceFSM_init(){
+    estado=BUTTON_UP;
+}
+void debounceFSM_update(){
 	switch (estado){
-		case (BUTTON_UP): if(BSP_PB_GetState(BUTTON_USER))estado=BUTTON_FALLING;
-						  break;
-		case (BUTTON_FALLING):if(!BSP_PB_GetState(BUTTON_USER))estado=BUTTON_UP;
+	case (BUTTON_UP): if(BSP_PB_GetState(BUTTON_USER)){
+						estado=BUTTON_FALLING;
+						delayInit(&estructura_tiempo,DEMORA_BASE);
+					}
+					  break;
+	case (BUTTON_FALLING): if(delayRead(&estructura_tiempo)){
+							 if(!BSP_PB_GetState(BUTTON_USER))estado=BUTTON_UP;
 							 else {
 								 buttonPressed();
 								 estado=BUTTON_DOWN;
 							 }
-							break;
-		case (BUTTON_DOWN):if(!BSP_PB_GetState(BUTTON_USER))estado=BUTTON_RAISING;
-							break;
-		case (BUTTON_RAISING):if(BSP_PB_GetState(BUTTON_USER))estado=BUTTON_DOWN;
-							 else {
+						 	}
+						break;
+	case (BUTTON_DOWN):if(!BSP_PB_GetState(BUTTON_USER)){
+							estado=BUTTON_RAISING;
+							delayInit(&estructura_tiempo,DEMORA_BASE);
+						}
 
+						break;
+	case (BUTTON_RAISING):
+						if(delayRead(&estructura_tiempo)){
+							 if(BSP_PB_GetState(BUTTON_USER))estado=BUTTON_DOWN;
+							 else {
 								 buttonReleased();
 								 estado=BUTTON_UP;
 							 }
-							break;
-		}
+						 }
+						break;
 
+
+	}
 }
 
 void buttonPressed(){
@@ -47,3 +66,5 @@ void buttonPressed(){
 void buttonReleased(){
 	tecla=0;
 }
+
+

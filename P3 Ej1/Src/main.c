@@ -78,8 +78,7 @@ int main(void){
   			  i++;
   			  if(i==sizeof(LEDS))i=0;
   		  }
-  		  estado^=1;
-  		  delayInit(&estructura,DEMORA_BASE);
+  		  estado^=true;
 
 	  }
 

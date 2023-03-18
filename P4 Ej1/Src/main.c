@@ -31,6 +31,7 @@
 
 /* Private typedef -----------------------------------------------------------*/
 typedef unsigned char uchar;
+
 typedef enum{
 	BUTTON_UP,
 	BUTTON_FALLING,
@@ -48,8 +49,8 @@ const char LEDS[LIM_SEC]={LED1,LED2,LED3};
 
 /* Private macro -------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
-uchar estado=BUTTON_UP;
-delay_t estructura;
+static uchar estado;
+static delay_t estructura;
 /* UART handler declaration */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -168,26 +169,38 @@ static void Error_Handler(void)
 }
 
 void debounceFSM_init(){
-    delayInit(&estructura,DEMORA_BASE);
+    estado=BUTTON_UP;
+
 
 }
 void debounceFSM_update(){
 	switch (estado){
-	case (BUTTON_UP): if(BSP_PB_GetState(BUTTON_USER))estado=BUTTON_FALLING;
+	case (BUTTON_UP): if(BSP_PB_GetState(BUTTON_USER)){
+						estado=BUTTON_FALLING;
+						delayInit(&estructura,DEMORA_BASE);
+					}
 					  break;
-	case (BUTTON_FALLING):if(!BSP_PB_GetState(BUTTON_USER))estado=BUTTON_UP;
-						 else {
-							 buttonPressed();
-							 estado=BUTTON_DOWN;
-						 }
+	case (BUTTON_FALLING): if(delayRead(&estructura)){
+							 if(!BSP_PB_GetState(BUTTON_USER))estado=BUTTON_UP;
+							 else {
+								 buttonPressed();
+								 estado=BUTTON_DOWN;
+							 }
+						 	}
 						break;
-	case (BUTTON_DOWN):if(!BSP_PB_GetState(BUTTON_USER))estado=BUTTON_RAISING;
-						break;
-	case (BUTTON_RAISING):if(BSP_PB_GetState(BUTTON_USER))estado=BUTTON_DOWN;
-						 else {
+	case (BUTTON_DOWN):if(!BSP_PB_GetState(BUTTON_USER)){
+							estado=BUTTON_RAISING;
+							delayInit(&estructura,DEMORA_BASE);
+						}
 
-							 buttonReleased();
-							 estado=BUTTON_UP;
+						break;
+	case (BUTTON_RAISING):
+						if(delayRead(&estructura)){
+							 if(BSP_PB_GetState(BUTTON_USER))estado=BUTTON_DOWN;
+							 else {
+								 buttonReleased();
+								 estado=BUTTON_UP;
+							 }
 						 }
 						break;
 

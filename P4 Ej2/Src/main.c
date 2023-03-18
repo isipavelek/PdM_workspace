@@ -21,6 +21,8 @@
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
 #include "API_debounce.h"
+#include "API_delay.h"
+
 
 /** @addtogroup STM32F4xx_HAL_Examples
   * @{
@@ -32,21 +34,14 @@
 
 /* Private typedef -----------------------------------------------------------*/
 typedef unsigned char uchar;
-
 /* Private define ------------------------------------------------------------*/
-
-#define FALSE 0
-#define TRUE 1
-
-
 
 
 #define DEMORA_100 100
 #define DEMORA_500 500
 /* Private macro -------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
-bool_t readKey();
-bool_t demora=FALSE;
+bool_t demora=false;
 extern bool_t tecla;
 /* Private function prototypes -----------------------------------------------*/
 
@@ -69,31 +64,23 @@ int main(void){
   /* Initialize BSP Led for LED2 */
   BSP_LED_Init(LED2);
   BSP_PB_Init(BUTTON_USER, BUTTON_MODE_GPIO);
-  //BSP_LED_On(LED1);
   debounceFSM_init();
   delayInit(&estructura,DEMORA_100);
 
   /* Infinite loop */
   while (1){
 	  debounceFSM_update();
-	  if(delayRead(&estructura)==TRUE){
-	  		  BSP_LED_Toggle(LED2);
-	  		  if(!demora)delayInit(&estructura,DEMORA_100);
-	  		  else delayInit(&estructura,DEMORA_500);
+	  if(delayRead(&estructura)==true)BSP_LED_Toggle(LED2);
+	  if(readKey()==true){
+		  if(!demora)delayWrite(&estructura,DEMORA_100);
+		  else delayWrite(&estructura,DEMORA_500);
+		  demora^=1;
+
 	  }
-	  if(readKey()==TRUE)demora^=1;
   }
 }
 
-bool_t readKey(){
 
-	if(tecla==TRUE){
-		tecla=0;
-		return TRUE;
-	}
-	return FALSE;
-;
-}
 //if(BSP_PB_GetState(BUTTON_USER)){
 
 
