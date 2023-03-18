@@ -6,8 +6,10 @@
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
-		<item key="selection" value="Init"/>
+		<item key="selection" value="readKey"/>
 		<list key="findhistory">
+			<item value="readKey"/>
+			<item value="demora"/>
 			<item value="init"/>
 			<item value="&#x09;HAL_UART_MspInit"/>
 			<item value="USART"/>
