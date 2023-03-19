@@ -26,10 +26,9 @@ bool uartInit(){
 	  huart1.Init.Mode = UART_MODE_TX_RX;
 	  huart1.Init.HwFlowCtl = UART_HWCONTROL_NONE;
 	  huart1.Init.OverSampling = UART_OVERSAMPLING_16;
-	  HAL_UART_MspInit(&huart1);
-	  if (HAL_UART_Init(&huart1) != HAL_OK)return true;
+	  if (HAL_UART_Init(&huart1) != HAL_OK)return false;
       uartSendString(TXT_INI);
-	  return false;
+	  return true;
 
 }
 void uartSendString(uint8_t * pstring){

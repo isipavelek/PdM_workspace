@@ -39,11 +39,11 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, READONLY, DEBUGGING, OCTETS
  17 .debug_macro  000254c7  00000000  00000000  00026a28  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 18 .debug_line   00008920  00000000  00000000  0004beef  2**0
+ 18 .debug_line   0000891f  00000000  00000000  0004beef  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 19 .debug_str    000e0e99  00000000  00000000  0005480f  2**0
+ 19 .debug_str    000e0e99  00000000  00000000  0005480e  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 20 .comment      00000050  00000000  00000000  001356a8  2**0
+ 20 .comment      00000050  00000000  00000000  001356a7  2**0
                   CONTENTS, READONLY
  21 .debug_frame  00001248  00000000  00000000  001356f8  2**2
                   CONTENTS, READONLY, DEBUGGING, OCTETS
@@ -354,7 +354,7 @@ Disassembly of section .text:
 
 080004f0 <readKey>:
 
-unsigned char estado=BUTTON_UP;
+static unsigned char estado=BUTTON_UP;
 static delay_t estructura_tiempo;
 bool_t tecla=0;
 
@@ -395,8 +395,6 @@ void debounceFSM_init(){
  800051c:	4b03      	ldr	r3, [pc, #12]	; (800052c <debounceFSM_init+0x14>)
  800051e:	2200      	movs	r2, #0
  8000520:	701a      	strb	r2, [r3, #0]
-
-
 }
  8000522:	bf00      	nop
  8000524:	46bd      	mov	sp, r7
