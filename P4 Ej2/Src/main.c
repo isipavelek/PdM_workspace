@@ -42,7 +42,6 @@ typedef unsigned char uchar;
 /* Private macro -------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
 bool_t demora=false;
-extern bool_t tecla;
 /* Private function prototypes -----------------------------------------------*/
 
 static void SystemClock_Config(void);
@@ -66,7 +65,6 @@ int main(void){
   BSP_PB_Init(BUTTON_USER, BUTTON_MODE_GPIO);
   debounceFSM_init();
   delayInit(&estructura,DEMORA_100);
-
   /* Infinite loop */
   while (1){
 	  debounceFSM_update();
@@ -74,7 +72,8 @@ int main(void){
 	  if(readKey()==true){
 		  if(!demora)delayWrite(&estructura,DEMORA_100);
 		  else delayWrite(&estructura,DEMORA_500);
-		  demora^=1;
+		  demora^=true;
+
 
 	  }
   }

@@ -1,10 +1,10 @@
-12:29:03 **** Incremental Build of configuration Debug for project P4 Ej2 ****
+11:07:43 **** Incremental Build of configuration Debug for project P4 Ej2 ****
 make -j16 all 
 arm-none-eabi-size   P4\ Ej2.elf 
    text	   data	    bss	    dec	    hex	filename
-   7164	     36	   1596	   8796	   225c	P4 Ej2.elf
+   7168	     36	   1596	   8800	   2260	P4 Ej2.elf
 Finished building: default.size.stdout
  
 
-12:29:04 Build Finished. 0 errors, 0 warnings. (took 420ms)
+11:07:43 Build Finished. 0 errors, 0 warnings. (took 346ms)
 
