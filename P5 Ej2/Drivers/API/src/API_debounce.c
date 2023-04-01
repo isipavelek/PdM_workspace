@@ -6,6 +6,7 @@
  */
 
 #include "API_debounce.h"
+#include "API_uart.h"
 
 
 static unsigned char estado=BUTTON_UP;

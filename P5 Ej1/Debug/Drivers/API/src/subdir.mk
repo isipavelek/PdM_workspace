@@ -7,16 +7,19 @@
 C_SRCS += \
 ../Drivers/API/src/API_debounce.c \
 ../Drivers/API/src/API_delay.c \
+../Drivers/API/src/API_init.c \
 ../Drivers/API/src/API_uart.c 
 
 OBJS += \
 ./Drivers/API/src/API_debounce.o \
 ./Drivers/API/src/API_delay.o \
+./Drivers/API/src/API_init.o \
 ./Drivers/API/src/API_uart.o 
 
 C_DEPS += \
 ./Drivers/API/src/API_debounce.d \
 ./Drivers/API/src/API_delay.d \
+./Drivers/API/src/API_init.d \
 ./Drivers/API/src/API_uart.d 
 
 
@@ -27,7 +30,7 @@ Drivers/API/src/%.o Drivers/API/src/%.su Drivers/API/src/%.cyclo: ../Drivers/API
 clean: clean-Drivers-2f-API-2f-src
 
 clean-Drivers-2f-API-2f-src:
-	-$(RM) ./Drivers/API/src/API_debounce.cyclo ./Drivers/API/src/API_debounce.d ./Drivers/API/src/API_debounce.o ./Drivers/API/src/API_debounce.su ./Drivers/API/src/API_delay.cyclo ./Drivers/API/src/API_delay.d ./Drivers/API/src/API_delay.o ./Drivers/API/src/API_delay.su ./Drivers/API/src/API_uart.cyclo ./Drivers/API/src/API_uart.d ./Drivers/API/src/API_uart.o ./Drivers/API/src/API_uart.su
+	-$(RM) ./Drivers/API/src/API_debounce.cyclo ./Drivers/API/src/API_debounce.d ./Drivers/API/src/API_debounce.o ./Drivers/API/src/API_debounce.su ./Drivers/API/src/API_delay.cyclo ./Drivers/API/src/API_delay.d ./Drivers/API/src/API_delay.o ./Drivers/API/src/API_delay.su ./Drivers/API/src/API_init.cyclo ./Drivers/API/src/API_init.d ./Drivers/API/src/API_init.o ./Drivers/API/src/API_init.su ./Drivers/API/src/API_uart.cyclo ./Drivers/API/src/API_uart.d ./Drivers/API/src/API_uart.o ./Drivers/API/src/API_uart.su
 
 .PHONY: clean-Drivers-2f-API-2f-src
 
