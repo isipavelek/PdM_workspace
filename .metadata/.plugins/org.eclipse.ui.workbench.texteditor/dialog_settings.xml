@@ -6,8 +6,9 @@
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
-		<item key="selection" value="readKey"/>
+		<item key="selection" value=""/>
 		<list key="findhistory">
+			<item value="USARTx_TX_PIN"/>
 			<item value="readKey"/>
 			<item value="demora"/>
 			<item value="init"/>

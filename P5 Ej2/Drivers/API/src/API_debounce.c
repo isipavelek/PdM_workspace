@@ -9,7 +9,7 @@
 #include "API_uart.h"
 
 
-static unsigned char estado=BUTTON_UP;
+static uint8_t estado=BUTTON_UP;
 static delay_t estructura_tiempo;
 
 

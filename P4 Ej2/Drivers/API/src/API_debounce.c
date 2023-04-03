@@ -6,9 +6,10 @@
  */
 
 #include "API_debounce.h"
+#include "API_delay.h"
 
 
-static unsigned char estado=BUTTON_UP;
+static uint8_t estado=BUTTON_UP;
 static delay_t estructura_tiempo;
 static bool_t tecla=0;
 

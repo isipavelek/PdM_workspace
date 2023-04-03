@@ -354,7 +354,7 @@ Disassembly of section .text:
 
 080004f0 <debounceFSM_init>:
 
-static unsigned char estado=BUTTON_UP;
+static uint8_t estado=BUTTON_UP;
 static delay_t estructura_tiempo;
 
 
